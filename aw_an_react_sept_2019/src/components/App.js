@@ -1,5 +1,6 @@
 import React from "react";
 
+import { QuestionIndexPage } from "./QuestionIndexPage";
 import QuestionShowPage from "./QuestionShowPage";
 
 // In React application, we create a component that acts
@@ -9,6 +10,7 @@ import QuestionShowPage from "./QuestionShowPage";
 function App() {
   return (
     <div className="ui container App">
+      <QuestionIndexPage />
       <QuestionShowPage />
     </div>
   );

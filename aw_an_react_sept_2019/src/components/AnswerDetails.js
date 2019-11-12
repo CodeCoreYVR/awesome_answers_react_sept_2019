@@ -3,12 +3,10 @@ import React from "react";
 import CreatedAtShow from "./CreatedAtShow";
 
 function AnswerDetails(props) {
-  {
-    /*
+  /*
       Using the 'style' property on a base HTML component
       will modify in the style attribute (inline styles.)
      */
-  }
   return (
     <div
       style={{
