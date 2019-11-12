@@ -3,8 +3,20 @@ import React from "react";
 import CreatedAtShow from "./CreatedAtShow";
 
 function AnswerDetails(props) {
+  {
+    /*
+      Using the 'style' property on a base HTML component
+      will modify in the style attribute (inline styles.)
+     */
+  }
   return (
-    <div>
+    <div
+      style={{
+        color: "white",
+        fontStyle: "italic",
+        backgroundColor: "teal"
+      }}
+    >
       <p>
         {props.body} <br />
         By {props.author.full_name} <br />
