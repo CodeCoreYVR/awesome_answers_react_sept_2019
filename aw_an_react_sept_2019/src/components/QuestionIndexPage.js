@@ -3,6 +3,12 @@ import React from "react";
 import data from "../questionData";
 
 export class QuestionIndexPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      questions: data
+    };
+  }
   render() {
     return (
       <main className="QuestionIndexPage">
@@ -13,7 +19,7 @@ export class QuestionIndexPage extends React.Component {
             paddingLeft: 0
           }}
         >
-          {data.map(question => (
+          {this.state.questions.map(question => (
             <li key={question.id}>
               <a href="">{question.title}</a>
             </li>
