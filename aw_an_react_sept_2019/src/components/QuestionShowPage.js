@@ -1,7 +1,8 @@
 import React from "react";
 
 import QuestionDetails from "./QuestionDetails";
-import AnswerDetails from "./AnswerDetails";
+import { AnswerList } from "./AnswerList";
+import questionData from "../questionData";
 
 function QuestionShowPage() {
   return (
@@ -13,11 +14,8 @@ function QuestionShowPage() {
         view_count={100}
         created_at={new Date().toLocaleString()}
       />
-      <AnswerDetails
-        body="Red."
-        author={{ full_name: "Gurshant Sandhu" }}
-        created_at={new Date().toLocaleString()}
-      />
+      <h2>Answers</h2>
+      <AnswerList answers={questionData[0].answers} />
     </main>
   );
 }
