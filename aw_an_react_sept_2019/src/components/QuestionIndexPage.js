@@ -1,5 +1,6 @@
 import React from "react";
 
+import NewQuestionForm from "./NewQuestionForm";
 import data from "../questionsData";
 
 export class QuestionIndexPage extends React.Component {
@@ -8,6 +9,31 @@ export class QuestionIndexPage extends React.Component {
     this.state = {
       questions: data
     };
+
+    this.createQuestion = this.createQuestion.bind(this);
+  }
+
+  createQuestion(params) {
+    // update the list of questions within our state
+    // by adding a new question to that list
+    this.setState(state => {
+      return {
+        questions: [
+          {
+            ...params,
+            // Remember to include current date
+            created_at: new Date(),
+            // And since there is no db yet,
+            // we need to generate ids for ourselves
+            // but this will be done by a db later
+            id: Math.max(...state.questions.map(question => question.id)) + 1
+          },
+          // copy the previous list of questions from our state
+          // into this new array, following the newly created question
+          ...state.questions
+        ]
+      };
+    });
   }
 
   deleteQuestion(id) {
@@ -25,6 +51,7 @@ export class QuestionIndexPage extends React.Component {
   render() {
     return (
       <main className="QuestionIndexPage">
+        <NewQuestionForm onSubmit={this.createQuestion} />
         <h2>Questions</h2>
         <div
           className="ui list"
