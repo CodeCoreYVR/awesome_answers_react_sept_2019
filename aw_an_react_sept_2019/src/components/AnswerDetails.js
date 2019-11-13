@@ -17,7 +17,8 @@ function AnswerDetails(props) {
     >
       <p>
         {props.body} <br />
-        By {props.author.full_name} <br />
+        By {props.author.first_name} {props.author.last_name}
+        <br />
         <CreatedAtShow created_at={props.created_at} />
       </p>
     </div>
