@@ -8,19 +8,21 @@ function AnswerDetails(props) {
       will modify in the style attribute (inline styles.)
      */
   return (
-    <div
-      style={{
-        color: "white",
-        fontStyle: "italic",
-        backgroundColor: "teal"
-      }}
-    >
-      <p>
-        {props.body} <br />
-        By {props.author.first_name} {props.author.last_name}
-        <br />
-        <CreatedAtShow created_at={props.created_at} />
-      </p>
+    <div className="ui list">
+      <div className="ui segment">
+        <p>
+          {props.body} <br />
+          By {props.author.first_name} {props.author.last_name}
+          <br />
+          <CreatedAtShow created_at={props.created_at} />
+          <button
+            className="ui right floated red small button"
+            onClick={() => props.onDeleteClick(props.id)}
+          >
+            Delete
+          </button>
+        </p>
+      </div>
     </div>
   );
 }
