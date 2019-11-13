@@ -15,10 +15,29 @@ class QuestionShowPage extends Component {
       question: questionData[0]
     };
   }
+  deleteQuestion() {
+    this.setState({
+      question: null
+    });
+  }
   render() {
+    console.log("question show page render method");
+    if (!this.state.question) {
+      return (
+        <main>
+          <h2>Question doesn't exist</h2>
+        </main>
+      );
+    }
     return (
       <main>
         <QuestionDetails {...this.state.question} />
+        <button
+          className="ui right floated red small button"
+          onClick={() => this.deleteQuestion()}
+        >
+          Delete
+        </button>
         <h2>Answers</h2>
         <AnswerList answers={questionData[0].answers} />
       </main>
