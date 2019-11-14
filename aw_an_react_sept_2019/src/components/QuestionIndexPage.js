@@ -1,16 +1,41 @@
 import React from "react";
 
 import NewQuestionForm from "./NewQuestionForm";
-import data from "../questionsData";
+import CurrentDateTime from "./CurrentDateTime";
+import { Question } from "../requests";
 
 export class QuestionIndexPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      questions: data
+      // Initially the list of the questions is empty until
+      // we fetch them from server
+      questions: [],
+      // Initially, before we have fetched the questions
+      // from the server, we will display some loading
+      // indicator to the user.
+      // but, once we have fetched the questions, we will change
+      // the isLoading property to 'false'
+      // and display the regular list of questions
+      isLoading: true,
+      // This boolean is used to determine if we should display
+      // the CurrentDateTime component
+      shouldShowTime: true
     };
 
     this.createQuestion = this.createQuestion.bind(this);
+  }
+
+  componentDidMount() {
+    // When the QuestionIndexPage component is mounted,
+    // we will fetch all of the questions from the server
+    Question.all().then(questions => {
+      // console.log(questions);
+      this.setState({
+        questions: questions,
+        isLoading: false
+      });
+    });
   }
 
   createQuestion(params) {
@@ -49,8 +74,19 @@ export class QuestionIndexPage extends React.Component {
     });
   }
   render() {
+    if (this.state.isLoading) {
+      return (
+        <div className="ui segment spinner">
+          <div className="ui active inverted dimmer">
+            <div className="ui text loader">Loading</div>
+          </div>
+          <p></p>
+        </div>
+      );
+    }
     return (
       <main className="QuestionIndexPage">
+        {this.state.shouldShowTime && <CurrentDateTime />}
         <NewQuestionForm onSubmit={this.createQuestion} />
         <h2>Questions</h2>
         <div
