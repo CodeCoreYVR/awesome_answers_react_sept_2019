@@ -1,7 +1,6 @@
 import React from "react";
 
 import NewQuestionForm from "./NewQuestionForm";
-import CurrentDateTime from "./CurrentDateTime";
 import { Question } from "../requests";
 import Spinner from "./Spinner";
 
@@ -18,10 +17,7 @@ export class QuestionIndexPage extends React.Component {
       // but, once we have fetched the questions, we will change
       // the isLoading property to 'false'
       // and display the regular list of questions
-      isLoading: true,
-      // This boolean is used to determine if we should display
-      // the CurrentDateTime component
-      shouldShowTime: true
+      isLoading: true
     };
 
     this.createQuestion = this.createQuestion.bind(this);
@@ -80,7 +76,6 @@ export class QuestionIndexPage extends React.Component {
     }
     return (
       <main className="QuestionIndexPage">
-        {this.state.shouldShowTime && <CurrentDateTime />}
         <NewQuestionForm onSubmit={this.createQuestion} />
         <h2>Questions</h2>
         <div
