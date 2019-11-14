@@ -37,25 +37,17 @@ export class QuestionIndexPage extends React.Component {
   }
 
   createQuestion(params) {
-    // update the list of questions within our state
-    // by adding a new question to that list
-    this.setState(state => {
-      return {
-        questions: [
-          {
-            ...params,
-            // Remember to include current date
-            created_at: new Date(),
-            // And since there is no db yet,
-            // we need to generate ids for ourselves
-            // but this will be done by a db later
-            id: Math.max(...state.questions.map(question => question.id)) + 1
-          },
-          // copy the previous list of questions from our state
-          // into this new array, following the newly created question
-          ...state.questions
-        ]
-      };
+    // When our new question form is submitted,
+    // send the form data in a fetch request to the server
+    Question.create(params).then(question => {
+      // This is how you do navigation using react-router-dom
+      // The 'Route' component gives all components that it renders
+      // (like this one) a prop named history
+      // This prop is an array-like structure that keeps track of
+      // the entire navigation history withing the app
+      // To navigate to a new path, we use the 'push' method
+      // to push a new path onto this history 'array-like' thing
+      this.props.history.push(`/questions/${question.id}`);
     });
   }
 
