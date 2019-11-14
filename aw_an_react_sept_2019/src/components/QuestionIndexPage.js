@@ -3,6 +3,7 @@ import React from "react";
 import NewQuestionForm from "./NewQuestionForm";
 import CurrentDateTime from "./CurrentDateTime";
 import { Question } from "../requests";
+import Spinner from "./Spinner";
 
 export class QuestionIndexPage extends React.Component {
   constructor(props) {
@@ -75,14 +76,7 @@ export class QuestionIndexPage extends React.Component {
   }
   render() {
     if (this.state.isLoading) {
-      return (
-        <div className="ui segment spinner">
-          <div className="ui active inverted dimmer">
-            <div className="ui text loader">Loading</div>
-          </div>
-          <p></p>
-        </div>
-      );
+      return <Spinner />;
     }
     return (
       <main className="QuestionIndexPage">

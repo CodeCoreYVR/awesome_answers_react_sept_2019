@@ -2,7 +2,8 @@ import React, { Component } from "react";
 
 import QuestionDetails from "./QuestionDetails";
 import { AnswerList } from "./AnswerList";
-import questionData from "../questionData";
+import { Question } from "../requests";
+import Spinner from "./Spinner";
 
 class QuestionShowPage extends Component {
   constructor(props) {
@@ -12,9 +13,22 @@ class QuestionShowPage extends Component {
     super(props);
 
     this.state = {
-      question: questionData[0]
+      question: null,
+      isLoading: true
     };
   }
+
+  componentDidMount() {
+    // Curreny 33 is hard-coded, but we are legitimately
+    // fetching a real question with id 33 from the server
+    Question.one(33).then(question => {
+      this.setState({
+        question: question,
+        isLoading: false
+      });
+    });
+  }
+
   deleteQuestion() {
     this.setState({
       question: null
@@ -30,12 +44,8 @@ class QuestionShowPage extends Component {
     });
   }
   render() {
-    if (!this.state.question) {
-      return (
-        <main>
-          <h2>Question doesn't exist</h2>
-        </main>
-      );
+    if (this.state.isLoading) {
+      return <Spinner />;
     }
     return (
       <main>
