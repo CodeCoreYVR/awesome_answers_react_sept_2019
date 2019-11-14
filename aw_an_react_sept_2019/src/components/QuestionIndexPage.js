@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import NewQuestionForm from "./NewQuestionForm";
 import { Question } from "../requests";
@@ -74,6 +75,14 @@ export class QuestionIndexPage extends React.Component {
     if (this.state.isLoading) {
       return <Spinner />;
     }
+    const { showAll = false } = this.props;
+    // const showAll = this.props.showAll || true;
+    const filteredQuestion = this.state.questions.filter((q, index) => {
+      if (showAll || index < 5) {
+        return true;
+      }
+      return false;
+    });
     return (
       <main className="QuestionIndexPage">
         <NewQuestionForm onSubmit={this.createQuestion} />
@@ -85,11 +94,11 @@ export class QuestionIndexPage extends React.Component {
             paddingLeft: 0
           }}
         >
-          {this.state.questions.map(question => (
+          {filteredQuestion.map(question => (
             <li className="ui segment" key={question.id}>
-              <a className="item" href="">
+              <Link to={`/questions/${question.id}`} className="item" href="">
                 {question.title}
-              </a>
+              </Link>
               <button
                 className="ui right floated red small button"
                 onClick={() => this.deleteQuestion(question.id)}

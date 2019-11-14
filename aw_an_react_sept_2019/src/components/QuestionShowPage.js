@@ -21,7 +21,30 @@ class QuestionShowPage extends Component {
   componentDidMount() {
     // Curreny 33 is hard-coded, but we are legitimately
     // fetching a real question with id 33 from the server
-    Question.one(33).then(question => {
+    // Question.one(33).then(question => {
+    //   this.setState({
+    //     question: question,
+    //     isLoading: false
+    //   });
+    // });
+    // All components that are rendered by a Route (Like this one)
+    // will be given props that Route component
+    // One of these props, called match, which contains
+    // information related to the pattern matched path defined in App.js
+    // <Route path='/questions/:id/:test/:blog' component={QuestionShowPage} />
+    // match: {
+    // params: {
+    // id: <whatever-id-is>,
+    // test: <whatever-is-the-test>,
+    // blog: <whatever-is-the-blog>
+    // }
+    // }
+
+    // Because the Route looked like the one above, the Route
+    // component pattern matched on the ':id', and will give us a param called
+    // 'id' within a property of 'match' called 'params'
+
+    Question.one(this.props.match.params.id).then(question => {
       this.setState({
         question: question,
         isLoading: false
