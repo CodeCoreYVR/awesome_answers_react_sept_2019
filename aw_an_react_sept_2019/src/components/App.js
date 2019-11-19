@@ -5,6 +5,7 @@ import QuestionShowPage from "./QuestionShowPage";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import NavBar from "./NavBar";
 import { Session } from "../requests";
+import SignInPage from "./SignInPage";
 
 // In React application, we create a component that acts
 // as the 'root' or the entry point to all of our other
@@ -18,21 +19,21 @@ class App extends React.Component {
     };
   }
 
-  componentDidMount() {
-    // this gives us a cookie that represents us being logged in
-    // Now, when we make POST requests to the server to make a Question,
-    // we will be authenticated
+  // componentDidMount() {
+  //   // this gives us a cookie that represents us being logged in
+  //   // Now, when we make POST requests to the server to make a Question,
+  //   // we will be authenticated
 
-    // This is a HACKY method until we learn about Authentication in React
-    Session.create({
-      email: "hano@codecore.com",
-      password: "supersecret"
-    }).then(user => {
-      this.setState({
-        currentUser: user
-      });
-    });
-  }
+  //   // This is a HACKY method until we learn about Authentication in React
+  //   Session.create({
+  //     email: "hano@codecore.com",
+  //     password: "supersecret"
+  //   }).then(user => {
+  //     this.setState({
+  //       currentUser: user
+  //     });
+  //   });
+  // }
   render() {
     return (
       // We need to wrap all component that are imported from
@@ -66,6 +67,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/questions" exact component={QuestionIndexPage} />
             <Route path="/questions/:id" component={QuestionShowPage} />
+            <Route path="/sign_in" component={SignInPage} />
           </Switch>
         </div>
       </BrowserRouter>
