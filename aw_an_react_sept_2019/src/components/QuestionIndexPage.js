@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import NewQuestionForm from "./NewQuestionForm";
 import { Question } from "../requests";
 import Spinner from "./Spinner";
 
@@ -20,8 +19,6 @@ export class QuestionIndexPage extends React.Component {
       // and display the regular list of questions
       isLoading: true
     };
-
-    this.createQuestion = this.createQuestion.bind(this);
   }
 
   componentDidMount() {
@@ -33,21 +30,6 @@ export class QuestionIndexPage extends React.Component {
         questions: questions,
         isLoading: false
       });
-    });
-  }
-
-  createQuestion(params) {
-    // When our new question form is submitted,
-    // send the form data in a fetch request to the server
-    Question.create(params).then(question => {
-      // This is how you do navigation using react-router-dom
-      // The 'Route' component gives all components that it renders
-      // (like this one) a prop named history
-      // This prop is an array-like structure that keeps track of
-      // the entire navigation history withing the app
-      // To navigate to a new path, we use the 'push' method
-      // to push a new path onto this history 'array-like' thing
-      this.props.history.push(`/questions/${question.id}`);
     });
   }
 
@@ -77,7 +59,6 @@ export class QuestionIndexPage extends React.Component {
     });
     return (
       <main className="QuestionIndexPage">
-        <NewQuestionForm onSubmit={this.createQuestion} />
         <h2>Questions</h2>
         <div
           className="ui list"
