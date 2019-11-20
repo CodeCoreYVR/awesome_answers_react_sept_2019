@@ -17,14 +17,25 @@ function NavBar(props) {
       <NavLink to="/questions" className="item">
         Questions
       </NavLink>
-      {!currentUser && <NavLink to="sign_in">Sign In </NavLink>}
-      {currentUser && (
+      {currentUser ? (
         <>
-          <span>Welcome {currentUser.full_name}</span>
-          <a href="#sign_out" onClick={handleSignOutClick}>
+          <span>{currentUser.full_name}</span>
+          <NavLink exact to="/questions/new">
+            Ask a Question
+          </NavLink>
+          <NavLink to="/questions" onClick={onSignOut}>
             Sign Out
-          </a>
+          </NavLink>
         </>
+      ) : (
+        <React.Fragment>
+          <NavLink exact to="/sign_in">
+            Sign In
+          </NavLink>
+          <NavLink exact to="/sign_up">
+            Sign Up
+          </NavLink>
+        </React.Fragment>
       )}
       <div className="right menu">
         <CurrentDateTime />
