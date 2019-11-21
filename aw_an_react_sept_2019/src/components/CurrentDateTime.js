@@ -56,7 +56,13 @@ class CurrentDateTime extends Component {
   }
   render() {
     // console.log("render");
-    return <div className="">{this.state.dateTime.toLocaleString()}</div>;
+    return (
+      <div className="">
+        <button className="ui red button">
+          {this.state.dateTime.toLocaleString()}
+        </button>
+      </div>
+    );
   }
 }
 

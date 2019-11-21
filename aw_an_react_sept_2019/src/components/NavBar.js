@@ -19,25 +19,27 @@ function NavBar(props) {
       </NavLink>
       {currentUser ? (
         <>
-          <span>{currentUser.full_name}</span>
-          <NavLink exact to="/questions/new">
+          <span className="item" style={{ color: "green" }}>
+            Welcome {currentUser.full_name}
+          </span>
+          <NavLink exact to="/questions/new" className="item">
             Ask a Question
           </NavLink>
-          <NavLink to="/questions" onClick={onSignOut}>
+          <NavLink to="/questions" onClick={onSignOut} className="item">
             Sign Out
           </NavLink>
         </>
       ) : (
         <React.Fragment>
-          <NavLink exact to="/sign_in">
+          <NavLink exact to="/sign_in" className="item">
             Sign In
           </NavLink>
-          <NavLink exact to="/sign_up">
+          <NavLink exact to="/sign_up" className="item">
             Sign Up
           </NavLink>
         </React.Fragment>
       )}
-      <div className="right menu">
+      <div className="right menu" className="item">
         <CurrentDateTime />
       </div>
     </div>
