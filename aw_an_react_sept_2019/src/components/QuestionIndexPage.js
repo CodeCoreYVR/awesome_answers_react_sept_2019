@@ -41,8 +41,10 @@ export class QuestionIndexPage extends React.Component {
     // in the current state
     // This happens asynchronously and will eventually trigger an update
     // to the DOM if there's any change
-    this.setState({
-      questions: this.state.questions.filter(q => q.id !== id)
+    Question.destroy(id).then(() => {
+      this.setState({
+        questions: this.state.questions.filter(q => q.id !== id)
+      });
     });
   }
   render() {
