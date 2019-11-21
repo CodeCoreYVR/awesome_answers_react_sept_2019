@@ -9,6 +9,7 @@ import SignInPage from "./SignInPage";
 import QuestionNewPage from "./QuestionNewPage";
 import AuthRoute from "./AuthRoute";
 import { SignUpPage } from "./SignUpPage";
+import NotFoundPage from "./NotFoundPage";
 
 // In React application, we create a component that acts
 // as the 'root' or the entry point to all of our other
@@ -100,6 +101,7 @@ class App extends React.Component {
                 <SignInPage {...routeProps} onSignIn={this.getUser} />
               )}
             />
+            <Route component={NotFoundPage} />
           </Switch>
         </div>
       </BrowserRouter>
